@@ -15,6 +15,7 @@
  */
 package io.netty.example.discard;
 
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
@@ -25,12 +26,15 @@ public class DiscardServerHandler extends SimpleChannelInboundHandler<Object> {
 
     @Override
     public void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
-        // discard
+        ((ByteBuf) msg).release();
+       //丢弃服务器。在channel中不进行任何处理
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         // Close the connection when an exception is raised.
+        //链接异常的异常处理
+
         cause.printStackTrace();
         ctx.close();
     }
