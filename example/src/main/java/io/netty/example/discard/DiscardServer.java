@@ -59,6 +59,8 @@ public final class DiscardServer {
         try {
             /**
              * ServerBootstrap是一个帮助我们创建服务。你可以直接使用这个类创建一个服务。请注意这是一个乏味的过程。
+             * handler在初始化时就会执行，而childHandler会在客户端成功connect后才执行。
+             *
              */
             ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup, workerGroup) //
